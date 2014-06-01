@@ -10441,6 +10441,7 @@ bool Unit::isSpellCrit(Unit* victim, SpellInfo const* spellProto, SpellSchoolMas
                 case 64844: // Divine Hymn
                 case 71607: // Item - Bauble of True Blood 10m
                 case 71646: // Item - Bauble of True Blood 25m
+				case 60526: // Item - Living Ice Crystal
                     break;
                 default:
                     return false;
