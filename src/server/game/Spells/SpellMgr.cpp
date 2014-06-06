@@ -3168,6 +3168,9 @@ void SpellMgr::LoadSpellInfoCorrections()
             case 19465: // Improved Stings (Rank 2)
                 spellInfo->Effects[EFFECT_2].TargetA = SpellImplicitTargetInfo(TARGET_UNIT_CASTER);
                 break;
+			case 61607: // Mark of Blood
+				spellInfo->AttributesEx |= SPELL_ATTR1_NO_THREAT;
+				break;
             case 30421: // Nether Portal - Perseverence
                 spellInfo->Effects[EFFECT_2].BasePoints += 30000;
                 break;
