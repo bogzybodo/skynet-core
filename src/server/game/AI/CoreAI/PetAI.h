@@ -63,6 +63,7 @@ class PetAI : public CreatureAI
         Unit* SelectNextTarget(bool allowAutoSelect) const;
         void HandleReturnMovement();
         void DoAttack(Unit* target, bool chase);
+		float CalculateFollowDistance();
         bool CanAttack(Unit* target);
         void ClearCharmInfoFlags();
 };

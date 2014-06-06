@@ -56,7 +56,7 @@ void PetAI::_stopAttack()
 {
     if (!me->IsAlive())
     {
-        TC_LOG_DEBUG("misc", "Creature stoped attacking cuz his dead [guid=%u]", me->GetGUIDLow());
+        TC_LOG_DEBUG("misc", "Creature stopped attacking because is dead [guid=%u]", me->GetGUIDLow());
         me->GetMotionMaster()->Clear();
         me->GetMotionMaster()->MoveIdle();
         me->CombatStop();
@@ -447,7 +447,7 @@ void PetAI::HandleReturnMovement()
             ClearCharmInfoFlags();
             me->GetCharmInfo()->SetIsReturning(true);
             me->GetMotionMaster()->Clear();
-            me->GetMotionMaster()->MoveFollow(me->GetCharmerOrOwner(), PET_FOLLOW_DIST, me->GetFollowAngle());
+            me->GetMotionMaster()->MoveFollow(me->GetCharmerOrOwner(), CalculateFollowDistance(), me->GetFollowAngle());
         }
     }
 }
@@ -516,6 +516,29 @@ void PetAI::MovementInform(uint32 moveType, uint32 data)
         default:
             break;
     }
+}
+
+float PetAI::CalculateFollowDistance()
+{
+	float distance;
+	CreatureTemplate const *cinfo =  me->GetCreatureTemplate();
+	
+	switch (cinfo->family)
+	{
+		case CREATURE_FAMILY_DEVILSAUR:
+			distance = -2.0f;
+			break;
+		case CREATURE_FAMILY_CHIMAERA:
+		case CREATURE_FAMILY_SPIDER:
+		case CREATURE_FAMILY_CORE_HOUND:
+		case CREATURE_FAMILY_RHINO:
+			distance = -4.0f;
+			break;
+		default:
+			distance = PET_FOLLOW_DIST;
+			break;
+	}
+	return distance;
 }
 
 bool PetAI::CanAttack(Unit* target)
